@@ -1,9 +1,26 @@
 
+import os
+import subprocess
 from setuptools import setup, find_packages
+from setuptools.command.install import install
+
+
+class DownloadModelCommand(install):
+    """Custom command to download ONNX model."""
+
+    def run(self):
+        install.run(self)
+        model_url = "https://media.githubusercontent.com/media/BexruzRaxmonov/email-parser-training-pipline/main/src/email_signature_detector/model/modernbert_sig_int8.onnx"
+        model_dir = os.path.join(self.install_lib, 'email_signature_detector', 'model')
+        os.makedirs(model_dir, exist_ok=True)
+        model_path = os.path.join(model_dir, 'modernbert_sig_int8.onnx')
+        print(f"Downloading model to {model_path}")
+        subprocess.run(["curl", "-L", model_url, "-o", model_path], check=True)
+
 
 setup(
     name='email_signature_detector',
-    version='0.1.1',
+    version='0.1.2',
     packages=find_packages(where='src'),
     package_dir={'': 'src'},
     install_requires=[
@@ -19,6 +36,9 @@ setup(
     url='https://github.com/numeo-ai/email-signature-detector',
     include_package_data=True,
     package_data={
-        'email_signature_detector': ['model/*', 'model/tokenizer/*'],
+        'email_signature_detector': ['model/tokenizer/*'],
+    },
+    cmdclass={
+        'install': DownloadModelCommand,
     },
 )
