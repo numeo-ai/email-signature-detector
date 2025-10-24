@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='email_signature_detector',
-    version='0.1.11',
+    version='0.1.10',
     packages=find_packages(where='src', include=['email_signature_detector*']),
     package_dir={'': 'src'},
     install_requires=[
