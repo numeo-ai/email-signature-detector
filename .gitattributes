@@ -1,0 +1,1 @@
+src/email_signature_detector/model/modernbert_sig_int8.onnx filter=lfs diff=lfs merge=lfs -text
