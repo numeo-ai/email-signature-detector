@@ -10,12 +10,12 @@ class DownloadModelCommand(install):
 
     def run(self):
         install.run(self)
-        model_url = "https://media.githubusercontent.com/media/BexruzRaxmonov/email-parser-training-pipline/main/src/email_signature_detector/model/modernbert_sig_int8.onnx"
+        model_url = "https://media.githubusercontent.com/media/numeo-ai/email-signature-detector/main/src/email_signature_detector/model/modernbert_sig_int8.onnx"
         model_dir = os.path.join(self.install_lib, 'email_signature_detector', 'model')
         os.makedirs(model_dir, exist_ok=True)
         model_path = os.path.join(model_dir, 'modernbert_sig_int8.onnx')
         print(f"Downloading model to {model_path}")
-        subprocess.run(["curl", "-L", model_url, "-o", model_path], check=True)
+        subprocess.run(["wget", "-O", model_path, model_url], check=True)
 
 
 setup(
