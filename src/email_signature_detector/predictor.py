@@ -273,6 +273,3 @@ class ONNXSignaturePredictor:
             "output_type": output_meta.type,
             "providers": self.session.get_providers()
         }
-
-
-email_signature_detector = ONNXSignaturePredictor()
